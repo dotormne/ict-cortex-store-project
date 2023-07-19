@@ -5,7 +5,6 @@ import { useStore } from "../contexts/storeContext";
 export const AddProduct = () => {
     const {addProduct} = useStore();
 
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const elements = event.target.elements;
@@ -23,25 +22,16 @@ export const AddProduct = () => {
             images: []
           }
 
-          fetch("https://dummyjson.com/products/add", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(newItem),
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                addProduct(data);
-                console.log("ADDED NEW ITEM", data)
-            });
+        addProduct(newItem);
 
-            elements.title.value = ""
-            elements.description.value = ""
-            elements.price.value = 0
-            elements.discount.value = 0
-            elements.rating.value = 0
-            elements.stock.value = 0
-            elements.brand.value = ""
-            elements.category.value = ""
+        elements.title.value = ""
+        elements.description.value = ""
+        elements.price.value = 0
+        elements.discount.value = 0
+        elements.rating.value = 0
+        elements.stock.value = 0
+        elements.brand.value = ""
+        elements.category.value = ""
 
     }
 

@@ -32,16 +32,7 @@ export const EditProduct = () => {
             category: elements.category.value,
           }
 
-          fetch(`https://dummyjson.com/products/${item.id}`, {
-            method: 'PUT', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newItem)
-            })
-            .then(res => res.json())
-            .then((data)  => {
-                editProduct(item.id, data);
-            });
-
+          editProduct(item.id, newItem)
     }
 
     if(items.length > 0 && item) {
