@@ -3,13 +3,14 @@ import { useEffect } from "react";
 import { useStore } from "../contexts/storeContext";
 import { ProductItem } from "../components/ProductItem";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Products = () => {
-  const { items, setItems, itemsToDisplay, setItemsToDisplay } = useStore();
+  const { items, deleteProduct, itemsToDisplay, setItemsToDisplay } = useStore();
   const navigate = useNavigate();
 
   const handleLoadMoreItems = () => {
-    if(itemsToDisplay + 9 <= items.length) {
+    if(itemsToDisplay < items.length) {
       setItemsToDisplay((oldItemsToDisplay) => oldItemsToDisplay + 9);
     }
   }
@@ -30,8 +31,7 @@ export const Products = () => {
       .then((data) => {
         console.log(`Item deleted successfully`, data.id)
       });
-      const newItemsArray = items.filter(item => item.id !== id);
-          setItems(newItemsArray);
+      deleteProduct(id);
   }
 
   useEffect(() => {
@@ -44,6 +44,7 @@ export const Products = () => {
     return (
     <div>
       <h1>Products</h1>
+      <Link to="/product/add">ADD NEW PRODUCT</Link>
       <ul>
       {items.map((item, index) => {
         if(index < itemsToDisplay){
@@ -57,7 +58,7 @@ export const Products = () => {
         }
       })}
       </ul>
-      {itemsToDisplay + 9 <= items.length ? <button type="button" onClick={handleLoadMoreItems}>Load More</button> : ""}
+      {itemsToDisplay < items.length ? <button type="button" onClick={handleLoadMoreItems}>Load More</button> : ""}
     </div>
     );
   } else {

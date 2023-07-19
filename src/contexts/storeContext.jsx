@@ -4,9 +4,9 @@ import { useState, createContext, useContext, useEffect } from "react";
 const StoreContext = createContext({
   items: [],
   setItems: () => {},
-  addItem: () => {},
-  removeItem: () => {},
-  editItem: () => {},
+  addProduct: () => {},
+  deleteProduct: () => {},
+  editProduct: () => {},
   itemsToDisplay: 0,
   setItemsToDisplay: () => {}
 });
@@ -15,16 +15,16 @@ export const StoreProvider = ({ children }) => {
   const [items, setItems] = useState([]);
   const [itemsToDisplay, setItemsToDisplay] = useState(0)
 
-  const addItem = (item) => {
-    setItems(...items, item);
+  const addProduct = (item) => {
+    setItems([...items, item]);
   }
 
-  const removeItem = (id) => {
+  const deleteProduct = (id) => {
     const filteredArray = items.filter(item => item.id !== id);
     setItems(filteredArray);
   }
 
-  const editItem = (id, newItem) => {
+  const editProduct = (id, newItem) => {
     const newList = items.map(item => {
       if(item.id === id) {
         return newItem;
@@ -44,9 +44,9 @@ export const StoreProvider = ({ children }) => {
   const value = {
     items,
     setItems,
-    addItem,
-    removeItem,
-    editItem,
+    addProduct,
+    deleteProduct,
+    editProduct,
     itemsToDisplay,
     setItemsToDisplay
   };
