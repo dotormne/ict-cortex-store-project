@@ -2,8 +2,9 @@ export const Input = ({className, label, name, type = "input", required, ...prop
     
     return(
     <div className={className}>
-        {label && <label htmlFor={name}>{label}</label>}
+        {label && <label className="font-semibold" htmlFor={name}>{label}</label>}
         <input
+            className="bg-violet-200 text-right px-2"
             id={name}
             required={required}
             type={type} 
